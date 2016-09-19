@@ -7,15 +7,32 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    var mainVC: ViewController?
+    var navController: UINavigationController?
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        FIRApp.configure()
+        
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window!.backgroundColor = UIColor.clearColor()
+        
+        mainVC = ViewController()
+        mainVC!.refreshWithFrame(CGRectMake(0, 0, window!.frame.size.width, window!.frame.size.height))
+        
+        navController = UINavigationController()
+        navController?.pushViewController(mainVC!, animated: false)
+        
+        window!.rootViewController = navController!
+        window!.makeKeyAndVisible()
+        
         return true
     }
 
